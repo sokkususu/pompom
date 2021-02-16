@@ -1,15 +1,15 @@
 <template>
   <nav class="navbar">
     <div class="navbar-timer navbar-item" style="color: black">
-      <icon-base width="auto" icon-name="timer"><icon-timer /></icon-base>
+      <icon-base width="100%" icon-name="timer"><icon-timer /></icon-base>
       <div class="navbar-text">Timer</div>
     </div>
     <div class="navbar-stats navbar-item">
-      <icon-base width="auto" icon-name="stats"><icon-stats /></icon-base>
+      <icon-base width="100%" icon-name="stats"><icon-stats /></icon-base>
       <div class="navbar-text">Stats</div>
     </div>
     <div class="navbar-settings navbar-item">
-      <icon-base width="auto" icon-name="settings"><icon-settings /></icon-base>
+      <icon-base width="100%" icon-name="settings"><icon-settings /></icon-base>
       <div class="navbar-text">Settings</div>
     </div>
   </nav>

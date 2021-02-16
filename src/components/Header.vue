@@ -19,7 +19,7 @@
 
 <style>
 .header {
-  height: 80px;
+  min-height: 80px;
   padding: 0 25px;
   box-shadow: 0px 2px 10px #afafaf29;
 }

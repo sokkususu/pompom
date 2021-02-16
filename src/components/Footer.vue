@@ -17,7 +17,7 @@ export default {
 <style>
 .footer {
   width: 100%;
-  height: 80px;
+  min-height: 80px;
   box-shadow: 0px -2px 10px #afafaf29;
   display: flex;
   flex-direction: column;

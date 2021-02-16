@@ -38,8 +38,8 @@ export default {
 </script>
 
 <style scoped>
-/* svg {
+svg {
   display: inline-block;
   vertical-align: baseline;
-} */
+}
 </style>
