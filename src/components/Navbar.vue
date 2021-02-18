@@ -1,17 +1,19 @@
 <template>
   <nav class="navbar">
-    <div class="navbar-timer navbar-item" style="color: black">
-      <icon-base width="100%" icon-name="timer"><icon-timer /></icon-base>
-      <div class="navbar-text">Timer</div>
-    </div>
-    <div class="navbar-stats navbar-item">
-      <icon-base width="100%" icon-name="stats"><icon-stats /></icon-base>
-      <div class="navbar-text">Stats</div>
-    </div>
-    <div class="navbar-settings navbar-item">
-      <icon-base width="100%" icon-name="settings"><icon-settings /></icon-base>
-      <div class="navbar-text">Settings</div>
-    </div>
+    <a href="#" class="navbar-timer navbar-item active">
+      <icon-base height="28px" icon-name="timer"><icon-timer /></icon-base>
+      <!-- <div class="navbar-text">Timer</div> -->
+    </a>
+    <a href="#" class="navbar-stats navbar-item">
+      <icon-base height="28px" icon-name="stats"><icon-stats /></icon-base>
+      <!-- <div class="navbar-text">Stats</div> -->
+    </a>
+    <a href="#" class="navbar-settings navbar-item">
+      <icon-base height="28px" icon-name="settings"
+        ><icon-settings
+      /></icon-base>
+      <!-- <div class="navbar-text">Settings</div> -->
+    </a>
   </nav>
 </template>
 
@@ -33,9 +35,17 @@ export default {
 
 <style scoped>
 .navbar {
+  height: 100%;
   display: flex;
   justify-content: space-around;
   color: rgb(172, 172, 172);
+}
+
+.navbar a {
+  color: rgb(172, 172, 172);
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
 }
 
 .navbar img {
@@ -50,8 +60,11 @@ export default {
   justify-content: center;
 }
 
-.active-item * {
-  color: black;
-  fill: black;
+.navbar-item > * {
+  margin: auto;
+}
+
+.navbar-item.active {
+  color: #434343;
 }
 </style>

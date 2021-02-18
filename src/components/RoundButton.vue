@@ -1,7 +1,7 @@
 <template>
-  <div class="round-button" :class="{ accent: accent }">
+  <button class="round-button" :class="{ accent: accent }">
     <slot />
-  </div>
+  </button>
 </template>
 
 <script>
@@ -17,6 +17,7 @@ export default {
 
 <style scoped>
 .round-button {
+  background-color: transparent;
   width: 38px;
   height: 38px;
   border: 1px solid #434343;
@@ -36,16 +37,5 @@ export default {
   border: 1px solid #ff5b41;
   color: #ff5b41;
   stroke: #ff5b41;
-}
-
-.round-button:hover {
-  /* color: #a4fc5c;
-  border: 1px solid #a4fc5c; */
-}
-
-.round-button:active {
-  color: #a4fc5c;
-  border: 1px solid #a4fc5c;
-  stroke: #a4fc5c;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
-  <footer class="footer">
+  <div class="bottom-menu">
     <Navbar />
-  </footer>
+  </div>
 </template>
 
 <script>
@@ -15,9 +15,9 @@ export default {
 </script>
 
 <style>
-.footer {
+.bottom-menu {
   width: 100%;
-  min-height: 80px;
+  min-height: 45px;
   box-shadow: 0px -2px 10px #afafaf29;
   display: flex;
   flex-direction: column;

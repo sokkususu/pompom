@@ -2,21 +2,28 @@
   <div id="app">
     <Header />
     <Content />
-    <Footer />
+    <BottomMenu v-if="isMobile" />
   </div>
 </template>
 
 <script>
 import Header from "./components/Header";
 import Content from "./components/Content";
-import Footer from "./components/Footer";
+import BottomMenu from "./components/BottomMenu";
 
 export default {
   name: "App",
   components: {
     Header,
     Content,
-    Footer,
+    BottomMenu,
+  },
+  data() {
+    return {
+      isMobile: /Mobile|webOS|BlackBerry|IEMobile|MeeGo|mini|Fennec|Windows Phone|Android|iP(ad|od|hone)/i.test(
+        navigator.userAgent
+      ),
+    };
   },
 };
 </script>
