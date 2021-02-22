@@ -29,17 +29,22 @@ export default {
 </script>
 
 <style>
+* {
+  box-sizing: border-box;
+}
+
 #app {
   font-family: "Poppins", sans-serif;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 100vh;
+  justify-content: center;
+  height: 100%;
 }
 
 body {
-  width: 100%;
   margin: 0;
   padding: 0;
+  height: 100vh;
+  max-height: -webkit-fill-available;
 }
 </style>

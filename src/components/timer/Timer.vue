@@ -116,13 +116,10 @@ export default {
 .timer {
   text-align: center;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100%;
 }
 
 .time-block {
+  height: 250px;
   display: flex;
   flex-direction: column;
   justify-content: center;

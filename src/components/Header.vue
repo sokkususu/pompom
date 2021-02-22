@@ -38,14 +38,17 @@ export default {
 .header {
   min-height: 60px;
   box-shadow: 0px 2px 10px #afafaf29;
+  position: fixed;
+  width: 100%;
   padding: 0 20px;
+  top: 0;
+  z-index: 1;
+  background-color: white;
 }
 
 .header-navbar {
   height: 100%;
-  margin: auto;
   width: 100%;
-  max-width: 900px;
   display: flex;
   justify-content: space-between;
 }
