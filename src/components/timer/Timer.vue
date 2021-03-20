@@ -2,7 +2,7 @@
   <div class="timer">
     <Task />
     <div class="time-block">
-      <TimerBar :progress="progress()" />
+      <TimerBar :height="width < 600 ? 200 : 280" :progress="progress()" />
       <div class="time">{{ displayTime() }}</div>
       <div class="status">{{ isPlay ? "focus" : "pause" }}</div>
     </div>
@@ -68,12 +68,19 @@ export default {
   },
   data() {
     return {
+      width: document.documentElement.clientWidth,
       isPlay: false,
-      defaultTime: 1 * 15,
-      time: 1 * 15,
+      defaultTime: 25 * 60,
+      time: 25 * 60,
     };
   },
+  created() {
+    window.addEventListener("resize", this.updateWidth);
+  },
   methods: {
+    updateWidth() {
+      this.width = document.documentElement.clientWidth;
+    },
     displayTime() {
       let minutes = Math.floor(this.time / 60);
       let seconds = this.time - minutes * 60;
@@ -140,5 +147,11 @@ export default {
   margin: auto;
   justify-content: space-between;
   align-items: center;
+}
+
+@media (min-width: 600px) {
+  .time-block {
+    height: 350px;
+  }
 }
 </style>

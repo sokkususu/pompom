@@ -5,9 +5,9 @@
       :indeterminate="indeterminate"
       :counter-clockwise="counterClockwise"
       :hide-background="hideBackground"
-      size="200"
+      :size="height"
       rotate
-      fillDuration="2"
+      :fillDuration="fillDuration"
       rotationDuration="1"
     />
   </div>
@@ -58,7 +58,7 @@ export default {
 }
 
 .vue-progress-path path {
-  stroke-width: 15;
+  stroke-width: 15px;
 }
 
 .vue-progress-path .progress {
@@ -67,5 +67,11 @@ export default {
 
 .vue-progress-path .background {
   stroke: #eeeeee;
+}
+
+@media (min-width: 600px) {
+  .vue-progress-path path {
+    stroke-width: 25px;
+  }
 }
 </style>

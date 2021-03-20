@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class="top-menu">
-        <Navbar v-if="!isMobile" />
+        <Navbar v-if="getClientWidth() > 600" />
         <button class="login-button">Log in</button>
       </div>
     </div>
@@ -26,15 +26,25 @@ export default {
   },
   data() {
     return {
-      isMobile: /Mobile|webOS|BlackBerry|IEMobile|MeeGo|mini|Fennec|Windows Phone|Android|iP(ad|od|hone)/i.test(
+      isMobile: /Mobile|webOS|BlackBerry|IEMobile|MeeGo|mini|Fennec|Windows Phone|Android|iP(od|hone)/i.test(
         navigator.userAgent
       ),
     };
   },
+  methods: {
+    getClientWidth() {
+      return document.documentElement.clientWidth;
+    }
+  }
 };
 </script>
 
 <style scoped>
+@media screen and (max-width: 400px) {
+  .logo-text {
+    display: none;
+  }
+}
 .header {
   min-height: 60px;
   box-shadow: 0px 2px 10px #afafaf29;

@@ -1,5 +1,5 @@
 <template>
-  <div class="bottom-menu">
+  <div v-if="clientWidth < 600" class="bottom-menu">
     <Navbar />
   </div>
 </template>
@@ -11,6 +11,11 @@ export default {
   components: {
     Navbar,
   },
+  data() {
+    return {
+      clientWidth: document.documentElement.clientWidth,
+    }
+  }
 };
 </script>
 
