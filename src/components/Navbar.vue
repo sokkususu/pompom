@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar">
-    <a href="#" class="navbar-timer navbar-item active">
+    <a href="/" :class="`navbar-timer navbar-item ${$router.path}`">
       <icon-base height="28px" icon-name="timer"><icon-timer /></icon-base>
       <!-- <div class="navbar-text">Timer</div> -->
     </a>
@@ -8,7 +8,7 @@
       <icon-base height="28px" icon-name="stats"><icon-stats /></icon-base>
       <!-- <div class="navbar-text">Stats</div> -->
     </a>
-    <a href="#" class="navbar-settings navbar-item">
+    <a href="/settings" class="navbar-settings navbar-item">
       <icon-base height="28px" icon-name="settings"
         ><icon-settings
       /></icon-base>

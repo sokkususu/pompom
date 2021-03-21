@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header />
-    <Content />
+    <router-view></router-view>
     <BottomMenu v-if="isMobile" />
   </div>
 </template>
