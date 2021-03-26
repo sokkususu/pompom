@@ -53,6 +53,8 @@ import IconStart from "../icons/timer_icons/IconStart";
 import IconStop from "../icons/timer_icons/IconStop";
 import IconPause from "../icons/timer_icons/IconPause";
 
+import { mapState } from "vuex";
+
 let timerId;
 
 export default {
@@ -68,22 +70,22 @@ export default {
   },
   data() {
     return {
-      width: document.documentElement.clientWidth,
-      isPlay: false,
-      defaultTime: 25 * 60,
-      time: 25 * 60,
+      // isPlay: false,
+      // defaultTime: 25 * 60,
+      // time: 25 * 60,
     };
   },
+  computed: mapState(["width", "isPlay", "defaultTime", "time"]),
   created() {
     window.addEventListener("resize", this.updateWidth);
   },
   methods: {
     updateWidth() {
-      this.width = document.documentElement.clientWidth;
+      this.$store.commit("updateWidth");
     },
     displayTime() {
-      let minutes = Math.floor(this.time / 60);
-      let seconds = this.time - minutes * 60;
+      let minutes = Math.floor(this.$store.state.time / 60);
+      let seconds = this.$store.state.time - minutes * 60;
 
       minutes = minutes < 10 ? "0" + minutes : +minutes;
       seconds = seconds < 10 ? "0" + seconds : +seconds;
@@ -91,12 +93,12 @@ export default {
       return minutes + ":" + seconds;
     },
     progress() {
-      return this.time / this.defaultTime;
+      return this.$store.state.time / this.$store.state.defaultTime;
     },
     countdown() {
       timerId = setInterval(() => {
-        if (this.time > 0) {
-          this.time--;
+        if (this.$store.state.time > 0) {
+          this.$store.state.time--;
         } else {
           clearInterval(timerId);
         }
@@ -104,16 +106,16 @@ export default {
     },
     resetTimer() {
       clearInterval(timerId);
-      this.time = this.defaultTime;
-      this.isPlay = false;
+      this.$store.state.time = this.$store.state.defaultTime;
+      this.$store.state.isPlay = false;
     },
     start() {
-      if (!this.isPlay) {
+      if (!this.$store.state.isPlay) {
         this.countdown();
       } else {
         clearInterval(timerId);
       }
-      this.isPlay = !this.isPlay;
+      this.$store.state.isPlay = !this.$store.state.isPlay;
     },
   },
 };

@@ -1,19 +1,16 @@
 <template>
   <nav class="navbar">
-    <a href="/" :class="`navbar-timer navbar-item ${$router.path}`">
+    <router-link to="/" class="navbar-timer navbar-item">
       <icon-base height="28px" icon-name="timer"><icon-timer /></icon-base>
-      <!-- <div class="navbar-text">Timer</div> -->
-    </a>
-    <a href="#" class="navbar-stats navbar-item">
+    </router-link>
+    <router-link to="#" class="navbar-stats navbar-item">
       <icon-base height="28px" icon-name="stats"><icon-stats /></icon-base>
-      <!-- <div class="navbar-text">Stats</div> -->
-    </a>
-    <a href="/settings" class="navbar-settings navbar-item">
+    </router-link>
+    <router-link to="/settings" class="navbar-settings navbar-item">
       <icon-base height="28px" icon-name="settings"
         ><icon-settings
       /></icon-base>
-      <!-- <div class="navbar-text">Settings</div> -->
-    </a>
+    </router-link>
   </nav>
 </template>
 
