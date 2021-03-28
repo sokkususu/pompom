@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class="top-menu">
-        <Navbar v-if="getClientWidth() > 600" />
+        <Navbar v-if="!isMobile || clientWidth > 600" />
         <button class="login-button">Log in</button>
       </div>
     </div>
@@ -20,22 +20,15 @@
 <script>
 import Navbar from "./Navbar";
 
+import { mapGetters } from "vuex";
+
 export default {
   components: {
     Navbar,
   },
-  data() {
-    return {
-      isMobile: /Mobile|webOS|BlackBerry|IEMobile|MeeGo|mini|Fennec|Windows Phone|Android|iP(od|hone)/i.test(
-        navigator.userAgent
-      ),
-    };
+  computed: {
+    ...mapGetters(["isMobile", "clientWidth"]),
   },
-  methods: {
-    getClientWidth() {
-      return document.documentElement.clientWidth;
-    }
-  }
 };
 </script>
 

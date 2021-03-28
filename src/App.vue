@@ -11,6 +11,8 @@ import Header from "./components/Header";
 import Content from "./components/Content";
 import BottomMenu from "./components/BottomMenu";
 
+import { mapGetters } from "vuex";
+
 export default {
   name: "App",
   components: {
@@ -18,12 +20,8 @@ export default {
     Content,
     BottomMenu,
   },
-  data() {
-    return {
-      isMobile: /Mobile|webOS|BlackBerry|IEMobile|MeeGo|mini|Fennec|Windows Phone|Android|iP(ad|od|hone)/i.test(
-        navigator.userAgent
-      ),
-    };
+  computed: {
+    ...mapGetters(["isMobile"]),
   },
 };
 </script>

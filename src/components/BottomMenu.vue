@@ -1,5 +1,5 @@
 <template>
-  <div v-if="clientWidth < 600" class="bottom-menu">
+  <div v-if="isMobile && clientWidth < 600" class="bottom-menu">
     <Navbar />
   </div>
 </template>
@@ -7,15 +7,15 @@
 <script>
 import Navbar from "./Navbar";
 
+import { mapGetters } from "vuex";
+
 export default {
   components: {
     Navbar,
   },
-  data() {
-    return {
-      clientWidth: document.documentElement.clientWidth,
-    }
-  }
+  computed: {
+    ...mapGetters(["clientWidth", "isMobile"]),
+  },
 };
 </script>
 
