@@ -6,7 +6,7 @@ export default {
     ),
   },
   mutations: {
-    updateWidth(state) {
+    updateClientWidth(state) {
       state.clientWidth = document.documentElement.clientWidth;
     },
   },

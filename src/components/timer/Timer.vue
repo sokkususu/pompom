@@ -16,7 +16,7 @@
           ><icon-stop />
         </icon-base>
       </round-button>
-      <round-button accent @click.native="start">
+      <round-button accent @click.native="play">
         <icon-base
           style="padding-left: 5px"
           width="18"
@@ -52,7 +52,7 @@ import IconStart from "../icons/timer_icons/IconStart";
 import IconStop from "../icons/timer_icons/IconStop";
 import IconPause from "../icons/timer_icons/IconPause";
 
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   components: {
@@ -69,17 +69,16 @@ export default {
     ...mapGetters(["clientWidth", "isPlay", "progress", "displayTime"]),
   },
   created() {
-    window.addEventListener("resize", this.updateWidth);
+    window.addEventListener("resize", this.updateClientWidth);
   },
   methods: {
-    updateWidth() {
-      this.$store.commit("updateWidth");
-    },
-    start() {
-      this.$store.commit("start");
-    },
-    resetTimer() {
-      this.$store.commit("resetTimer");
+    ...mapMutations(["updateClientWidth", "resetTimer"]),
+    play() {
+      if (!this.isPlay) {
+        this.$store.dispatch("start");
+      } else {
+        this.$store.commit("pause");
+      }
     },
   },
 };

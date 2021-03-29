@@ -17,7 +17,6 @@ export default {
 <style scoped>
 .content {
   padding: 60px 0 45px 0;
-  height: 100hv;
   display: flex;
   flex-direction: column;
   justify-content: center;

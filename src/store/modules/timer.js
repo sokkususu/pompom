@@ -1,25 +1,38 @@
+let timerId = null;
+
 export default {
   state: {
     isPlay: false,
     defaultTime: 25 * 60,
-    time: 25 * 60,
-    timerId: null,
+    time: 5,
   },
   mutations: {
-    start(state) {
-      function countdown(state) {
-        state.timerId = setInterval(() => {
-          state.time > 0 ? state.time-- : clearInterval(state.timerId);
-        }, 1000);
-      }
-
-      !state.isPlay ? countdown(state) : clearInterval(state.timerId);
-      state.isPlay = !state.isPlay;
+    countdown(state) {
+      state.time--;
+    },
+    pause(state) {
+      clearInterval(timerId);
+      state.isPlay = false;
+    },
+    play(state) {
+      state.isPlay = true;
     },
     resetTimer(state) {
-      clearInterval(state.timerId);
-      state.time = state.defaultTime;
+      clearInterval(timerId);
       state.isPlay = false;
+      state.time = state.defaultTime;
+    },
+  },
+  actions: {
+    start({ commit, state }) {
+      commit("play");
+      timerId = setInterval(() => {
+        if (state.time > 0) {
+          commit("countdown");
+        } else {
+          commit("resetTimer");
+        }
+      }, 1000);
     },
   },
   getters: {
