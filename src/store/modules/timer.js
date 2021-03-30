@@ -2,8 +2,14 @@ let timerId = null;
 
 export default {
   state: {
+    status: "focus",
     isPlay: false,
-    defaultTime: 25 * 60,
+    workDuration: 5,
+    shortBreakDuration: 4,
+    longBreakDuration: 6,
+    duration: 5,
+    round: 1,
+    rounds: 4,
     time: 5,
   },
   mutations: {
@@ -20,7 +26,23 @@ export default {
     resetTimer(state) {
       clearInterval(timerId);
       state.isPlay = false;
-      state.time = state.defaultTime;
+      state.time = state.workDuration;
+    },
+    addRound(state) {
+      state.round++;
+    },
+    setStatus(state, status) {
+      state.status = status;
+    },
+    break(state) {
+      switch (state.status) {
+        case "shortBreak":
+          state.time = state.duration = state.shortBreakDuration;
+          break;
+        case "longBreak":
+          state.time = state.duration = state.longBreakDuration;
+          break;
+      }
     },
   },
   actions: {
@@ -36,8 +58,10 @@ export default {
     },
   },
   getters: {
-    progress: (state) => state.time / state.defaultTime,
+    progress: (state) => state.time / state.duration,
     isPlay: (state) => state.isPlay,
+    rounds: (state) => state.round + "/" + state.rounds,
+
     displayTime: (state) => {
       let minutes = Math.floor(state.time / 60);
       let seconds = state.time - minutes * 60;

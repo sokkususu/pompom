@@ -1,13 +1,19 @@
 import VueRouter from "vue-router";
-import Settings from "../components/Settings";
-import Content from "../components/Content";
+
+import Timer from "../components/timer/Timer";
+import Stats from "../components/stats/Stats";
+import Settings from "../components/settings/Settings";
 
 export default new VueRouter({
   mode: "history",
   routes: [
     {
       path: "/",
-      component: Content,
+      component: Timer,
+    },
+    {
+      path: "/stats",
+      component: Stats,
     },
     {
       path: "/settings",

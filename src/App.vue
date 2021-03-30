@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header />
-    <router-view></router-view>
+    <Content />
     <BottomMenu v-if="isMobile" />
   </div>
 </template>
@@ -11,7 +11,7 @@ import Header from "./components/Header";
 import Content from "./components/Content";
 import BottomMenu from "./components/BottomMenu";
 
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   name: "App",
@@ -23,6 +23,12 @@ export default {
   computed: {
     ...mapGetters(["isMobile"]),
   },
+  created() {
+    window.addEventListener("resize", this.updateClientWidth);
+  },
+  methods: {
+    ...mapMutations(["updateClientWidth"]),
+  },
 };
 </script>
 
@@ -31,18 +37,18 @@ export default {
   box-sizing: border-box;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  max-height: -webkit-fill-available;
+}
+
 #app {
   font-family: "Poppins", sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: center;
   height: 100%;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  max-height: -webkit-fill-available;
 }
 </style>

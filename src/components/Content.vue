@@ -1,6 +1,6 @@
 <template>
-  <div class="content">
-    <Timer />
+  <div id="content">
+    <router-view></router-view>
   </div>
 </template>
 
@@ -15,8 +15,7 @@ export default {
 </script>
 
 <style scoped>
-.content {
-  padding: 60px 0 45px 0;
+#content {
   display: flex;
   flex-direction: column;
   justify-content: center;

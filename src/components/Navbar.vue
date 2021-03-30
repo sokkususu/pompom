@@ -3,7 +3,7 @@
     <router-link to="/" class="navbar-timer navbar-item">
       <icon-base height="28px" icon-name="timer"><icon-timer /></icon-base>
     </router-link>
-    <router-link to="#" class="navbar-stats navbar-item">
+    <router-link to="/stats" class="navbar-stats navbar-item">
       <icon-base height="28px" icon-name="stats"><icon-stats /></icon-base>
     </router-link>
     <router-link to="/settings" class="navbar-settings navbar-item">
