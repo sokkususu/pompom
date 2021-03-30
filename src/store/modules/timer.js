@@ -3,14 +3,13 @@ let timerId = null;
 export default {
   state: {
     status: "focus",
-    isPlay: false,
-    workDuration: 5,
-    shortBreakDuration: 4,
-    longBreakDuration: 6,
-    duration: 5,
+    workDuration: 3,
+    shortBreakDuration: 2,
+    longBreakDuration: 4,
+    duration: 3,
     round: 1,
-    rounds: 4,
-    time: 5,
+    rounds: 2,
+    time: 3,
   },
   mutations: {
     countdown(state) {
@@ -20,38 +19,43 @@ export default {
       clearInterval(timerId);
       state.isPlay = false;
     },
-    play(state) {
-      state.isPlay = true;
-    },
     resetTimer(state) {
       clearInterval(timerId);
       state.isPlay = false;
-      state.time = state.workDuration;
+      state.duration = state.time =
+        state.status == "shortBreak"
+          ? state.shortBreakDuration
+          : state.status == "longBreak"
+          ? state.longBreakDuration
+          : state.workDuration;
     },
     addRound(state) {
       state.round++;
     },
-    setStatus(state, status) {
+    changeStatus(state) {
+      let status;
+
+      if (state.status == "focus") {
+        status = state.round != state.rounds ? "shortBreak" : "longBreak";
+      } else {
+        state.status == "shortBreak" ? state.round++ : (state.round = 1);
+        status = "focus";
+      }
+
       state.status = status;
     },
-    break(state) {
-      switch (state.status) {
-        case "shortBreak":
-          state.time = state.duration = state.shortBreakDuration;
-          break;
-        case "longBreak":
-          state.time = state.duration = state.longBreakDuration;
-          break;
-      }
+    resetRounds(state) {
+      state.round = 1;
     },
+    skipTimer(state) {},
   },
   actions: {
     start({ commit, state }) {
-      commit("play");
       timerId = setInterval(() => {
         if (state.time > 0) {
           commit("countdown");
         } else {
+          commit("changeStatus");
           commit("resetTimer");
         }
       }, 1000);
@@ -60,7 +64,14 @@ export default {
   getters: {
     progress: (state) => state.time / state.duration,
     isPlay: (state) => state.isPlay,
-    rounds: (state) => state.round + "/" + state.rounds,
+
+    status: (state) => {
+      return state.status == "shortBreak"
+        ? "short break"
+        : state.status == "longBreak"
+        ? "long break"
+        : state.round + "/" + state.rounds;
+    },
 
     displayTime: (state) => {
       let minutes = Math.floor(state.time / 60);

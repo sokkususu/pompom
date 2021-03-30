@@ -2,7 +2,7 @@
   <div id="time-block">
     <TimerBar :height="clientWidth < 600 ? 200 : 280" :progress="progress" />
     <div id="time">{{ displayTime }}</div>
-    <div id="status">{{ rounds }}</div>
+    <div id="status">{{ status }}</div>
   </div>
 </template>
 
@@ -16,7 +16,7 @@ export default {
     TimerBar,
   },
   computed: {
-    ...mapGetters(["clientWidth", "progress", "displayTime", "rounds"]),
+    ...mapGetters(["clientWidth", "progress", "displayTime", "status"]),
   },
 };
 </script>
