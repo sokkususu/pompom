@@ -2,6 +2,7 @@ let timerId = null;
 
 export default {
   state: {
+    isPlay: false,
     status: "focus",
     workDuration: 3,
     shortBreakDuration: 2,
@@ -12,6 +13,9 @@ export default {
     time: 3,
   },
   mutations: {
+    play(state) {
+      state.isPlay = true;
+    },
     countdown(state) {
       state.time--;
     },
@@ -47,10 +51,11 @@ export default {
     resetRounds(state) {
       state.round = 1;
     },
-    skipTimer(state) {},
   },
   actions: {
     start({ commit, state }) {
+      commit("play");
+
       timerId = setInterval(() => {
         if (state.time > 0) {
           commit("countdown");
@@ -60,17 +65,21 @@ export default {
         }
       }, 1000);
     },
+    skipTimer({ commit }) {
+      commit("changeStatus");
+      commit("resetTimer");
+    },
   },
   getters: {
     progress: (state) => state.time / state.duration,
     isPlay: (state) => state.isPlay,
 
     status: (state) => {
-      return state.status == "shortBreak"
-        ? "short break"
-        : state.status == "longBreak"
-        ? "long break"
-        : state.round + "/" + state.rounds;
+      return {
+        shortBreak: "short break",
+        longBreak: "long break",
+        focus: `${state.round}/${state.rounds}`,
+      }[state.status];
     },
 
     displayTime: (state) => {

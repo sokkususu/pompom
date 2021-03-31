@@ -21,7 +21,7 @@
         <icon-pause v-else />
       </icon-base>
     </round-button>
-    <round-button>
+    <round-button @click.native="skipTimer">
       <icon-base
         width="12"
         height="12"
@@ -42,7 +42,7 @@ import IconStart from "../icons/timer_icons/IconStart";
 import IconStop from "../icons/timer_icons/IconStop";
 import IconPause from "../icons/timer_icons/IconPause";
 
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 
 export default {
   components: {
@@ -58,6 +58,8 @@ export default {
   },
   methods: {
     ...mapMutations(["resetTimer"]),
+    ...mapActions(["skipTimer"]),
+
     play() {
       if (!this.isPlay) {
         this.$store.dispatch("start");
