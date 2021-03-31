@@ -15,13 +15,18 @@ import { mapGetters, mapMutations } from "vuex";
 
 export default {
   name: "App",
+  metaInfo() {
+    return {
+      title: `${this.displayTime} | ${this.status}`,
+    };
+  },
   components: {
     Header,
     Content,
     BottomMenu,
   },
   computed: {
-    ...mapGetters(["isMobile"]),
+    ...mapGetters(["isMobile", "status", "displayTime"]),
   },
   created() {
     window.addEventListener("resize", this.updateClientWidth);

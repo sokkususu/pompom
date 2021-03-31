@@ -48,8 +48,8 @@ export default {
     ...mapGetters(["isPlay"]),
   },
   methods: {
-    ...mapMutations(["resetTimer"]),
-    ...mapActions(["skipTimer"]),
+    // ...mapMutations([""]),
+    ...mapActions(["skipTimer", "resetTimer"]),
 
     play() {
       if (!this.isPlay) {

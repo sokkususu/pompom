@@ -10,9 +10,9 @@
       :contained="true"
       :lazy="true"
     ></vue-slider>
-    <h4>Work duration</h4>
+    <h4>Focus duration</h4>
     <vue-slider
-      v-model="settings.workDuration"
+      v-model="settings.focusDuration"
       :adsorb="true"
       :min="5"
       :max="60"
@@ -38,7 +38,7 @@
       :contained="true"
     ></vue-slider>
     <br />
-    <button @click="applySettings(settings)">Apply</button>
+    <button @click="apply">Apply</button>
   </div>
 </template>
 
@@ -46,7 +46,7 @@
 import VueSlider from "vue-slider-component";
 import "vue-slider-component/theme/antd.css";
 
-import { mapGetters, mapMutations } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 
 export default {
   name: "Settings",
@@ -57,7 +57,7 @@ export default {
     return {
       settings: {
         rounds: 4,
-        workDuration: 25,
+        focusDuration: 25,
         shortBreakDuration: 5,
         longBreakDuration: 20,
       },
@@ -69,12 +69,19 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(["applySettings"]),
+    ...mapMutations(["applySettings", "resetRounds", "changeStatus"]),
+    ...mapActions(["resetTimer"]),
+    apply() {
+      this.applySettings(this.settings);
+      this.resetTimer();
+      this.resetRounds();
+      this.changeStatus("focus");
+    },
   },
   computed: {
     ...mapGetters([
       "rounds",
-      "workDuration",
+      "focusDuration",
       "shortBreakDuration",
       "longBreakDuration",
     ]),

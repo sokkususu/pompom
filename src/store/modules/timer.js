@@ -1,20 +1,21 @@
+import { DISPLAY_STATUS } from "@/consts";
+
 let timerId = null;
 
 export default {
   state: {
     isPlay: false,
     status: "focus",
-    workDuration: 25 * 60,
-    shortBreakDuration: 5 * 60,
-    longBreakDuration: 20 * 60,
     duration: 25 * 60,
     round: 1,
-    rounds: 4,
     time: 25 * 60,
   },
   mutations: {
     play(state) {
       state.isPlay = true;
+    },
+    stop(state) {
+      state.isPlay = false;
     },
     countdown(state) {
       state.time--;
@@ -23,79 +24,63 @@ export default {
       clearInterval(timerId);
       state.isPlay = false;
     },
-    resetTimer(state) {
-      clearInterval(timerId);
-      state.isPlay = false;
-      state.duration = state.time =
-        state.status == "shortBreak"
-          ? state.shortBreakDuration
-          : state.status == "longBreak"
-          ? state.longBreakDuration
-          : state.workDuration;
-    },
     addRound(state) {
       state.round++;
-    },
-    changeStatus(state) {
-      let status;
-
-      if (state.status == "focus") {
-        status = state.round != state.rounds ? "shortBreak" : "longBreak";
-      } else {
-        state.status == "shortBreak" ? state.round++ : (state.round = 1);
-        status = "focus";
-      }
-
-      state.status = status;
     },
     resetRounds(state) {
       state.round = 1;
     },
-    applySettings(state, settings) {
-      state.rounds = settings.rounds;
-      state.workDuration = state.time = state.duration =
-        settings.workDuration * 60;
-      state.shortBreakDuration = settings.shortBreakDuration * 60;
-      state.longBreakDuration = settings.longBreakDuration * 60;
-
-      clearInterval(timerId);
-      state.isPlay = false;
-      state.round = 1;
+    changeStatus(state, status) {
+      state.status = status;
+    },
+    resetTime(state, duration) {
+      state.time = state.duration = duration;
     },
   },
   actions: {
-    start({ commit, state }) {
+    start({ commit, state, dispatch }) {
       commit("play");
 
       timerId = setInterval(() => {
         if (state.time > 0) {
           commit("countdown");
         } else {
-          commit("changeStatus");
-          commit("resetTimer");
+          commit("nextStatus");
+          dispatch("resetTimer");
         }
       }, 1000);
     },
-    skipTimer({ commit }) {
-      commit("changeStatus");
-      commit("resetTimer");
+    skipTimer({ dispatch }) {
+      dispatch("nextStatus");
+      dispatch("resetTimer");
+    },
+    resetTimer({ state, commit, rootGetters }) {
+      clearInterval(timerId);
+      commit("stop");
+      commit("resetTime", rootGetters[`${state.status}Duration`] * 60);
+    },
+    nextStatus({ state, commit, rootGetters }) {
+      let status;
+      if (state.status == "focus") {
+        status = state.round != rootGetters.rounds ? "shortBreak" : "longBreak";
+      } else {
+        state.status == "shortBreak"
+          ? commit("addRound")
+          : commit("resetRounds");
+        status = "focus";
+      }
+      commit("changeStatus", status);
     },
   },
   getters: {
     progress: (state) => state.time / state.duration,
     isPlay: (state) => state.isPlay,
 
-    rounds: (state) => state.rounds,
-    workDuration: (state) => state.workDuration / 60,
-    shortBreakDuration: (state) => state.shortBreakDuration / 60,
-    longBreakDuration: (state) => state.longBreakDuration / 60,
-
-    status: (state) => {
-      return {
-        shortBreak: "short break",
-        longBreak: "long break",
-        focus: `${state.round}/${state.rounds}`,
-      }[state.status];
+    status: (state, rootGetters) => {
+      let status = DISPLAY_STATUS[state.status];
+      return state.status == "focus"
+        ? `${status} ${state.round}/${rootGetters.rounds}`
+        : status;
     },
 
     displayTime: (state) => {
