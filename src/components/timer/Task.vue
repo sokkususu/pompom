@@ -1,9 +1,13 @@
 <template>
-  <input id="task-input" type="text" />
+  <div class="task">
+    <input id="task-input" type="text" />
+  </div>
 </template>
 
 <script>
-export default {};
+export default {
+  name: "Task",
+};
 </script>
 
 <style>

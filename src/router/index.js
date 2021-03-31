@@ -9,6 +9,10 @@ export default new VueRouter({
   routes: [
     {
       path: "/",
+      redirect: "/timer",
+    },
+    {
+      path: "/timer",
       component: Timer,
     },
     {

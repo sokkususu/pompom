@@ -8,6 +8,7 @@
 import Timer from "./timer/Timer";
 
 export default {
+  name: "Content",
   components: {
     Timer,
   },
@@ -16,6 +17,7 @@ export default {
 
 <style scoped>
 #content {
+  padding: 0 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;

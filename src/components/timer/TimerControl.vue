@@ -1,11 +1,7 @@
 <template>
   <div class="control">
     <round-button @click.native="resetTimer">
-      <icon-base
-        width="12"
-        height="12"
-        icon-name="icon-stop"
-        viewBox="0 0 12 12"
+      <icon-base width="12" height="12" viewBox="0 0 12 12"
         ><icon-stop />
       </icon-base>
     </round-button>
@@ -14,7 +10,6 @@
         style="padding-left: 5px"
         width="18"
         height="18"
-        icon-name="icon-stop"
         viewBox="0 0 12 12"
       >
         <icon-start v-if="!isPlay" />
@@ -22,11 +17,7 @@
       </icon-base>
     </round-button>
     <round-button @click.native="skipTimer">
-      <icon-base
-        width="12"
-        height="12"
-        icon-name="icon-stop"
-        viewBox="0 0 12 12"
+      <icon-base width="12" height="12" viewBox="0 0 12 12"
         ><icon-next stroke="currentColor" />
       </icon-base>
     </round-button>

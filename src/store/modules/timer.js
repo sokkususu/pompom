@@ -4,13 +4,13 @@ export default {
   state: {
     isPlay: false,
     status: "focus",
-    workDuration: 3,
-    shortBreakDuration: 2,
-    longBreakDuration: 4,
-    duration: 3,
+    workDuration: 25 * 60,
+    shortBreakDuration: 5 * 60,
+    longBreakDuration: 20 * 60,
+    duration: 25 * 60,
     round: 1,
-    rounds: 2,
-    time: 3,
+    rounds: 4,
+    time: 25 * 60,
   },
   mutations: {
     play(state) {
@@ -51,6 +51,17 @@ export default {
     resetRounds(state) {
       state.round = 1;
     },
+    applySettings(state, settings) {
+      state.rounds = settings.rounds;
+      state.workDuration = state.time = state.duration =
+        settings.workDuration * 60;
+      state.shortBreakDuration = settings.shortBreakDuration * 60;
+      state.longBreakDuration = settings.longBreakDuration * 60;
+
+      clearInterval(timerId);
+      state.isPlay = false;
+      state.round = 1;
+    },
   },
   actions: {
     start({ commit, state }) {
@@ -73,6 +84,11 @@ export default {
   getters: {
     progress: (state) => state.time / state.duration,
     isPlay: (state) => state.isPlay,
+
+    rounds: (state) => state.rounds,
+    workDuration: (state) => state.workDuration / 60,
+    shortBreakDuration: (state) => state.shortBreakDuration / 60,
+    longBreakDuration: (state) => state.longBreakDuration / 60,
 
     status: (state) => {
       return {

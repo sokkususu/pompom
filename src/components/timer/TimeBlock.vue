@@ -12,6 +12,7 @@ import TimerBar from "./TimerBar";
 import { mapGetters } from "vuex";
 
 export default {
+  name: "TimeBlock",
   components: {
     TimerBar,
   },

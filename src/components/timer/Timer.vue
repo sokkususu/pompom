@@ -12,6 +12,7 @@ import TimerControl from "./TimerControl";
 import TimeBlock from "./TimeBlock";
 
 export default {
+  name: "Timer",
   components: {
     Task,
     TimerControl,

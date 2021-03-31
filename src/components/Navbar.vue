@@ -1,15 +1,14 @@
 <template>
   <nav class="navbar">
-    <router-link to="/" class="navbar-timer navbar-item">
-      <icon-base height="28px" icon-name="timer"><icon-timer /></icon-base>
-    </router-link>
-    <router-link to="/stats" class="navbar-stats navbar-item">
-      <icon-base height="28px" icon-name="stats"><icon-stats /></icon-base>
-    </router-link>
-    <router-link to="/settings" class="navbar-settings navbar-item">
-      <icon-base height="28px" icon-name="settings"
-        ><icon-settings
-      /></icon-base>
+    <router-link
+      v-for="item in items"
+      :key="item.id"
+      :to="`/${item}`"
+      :class="`navbar-${item} navbar-item`"
+    >
+      <icon-base :height="iconHeight" :icon-name="item">
+        <component :is="`icon-${item}`"></component>
+      </icon-base>
     </router-link>
   </nav>
 </template>
@@ -21,6 +20,12 @@ import IconStats from "./icons/IconStats";
 import IconSettings from "./icons/IconSettings";
 
 export default {
+  data() {
+    return {
+      items: ["timer", "stats", "settings"],
+      iconHeight: 28,
+    };
+  },
   components: {
     IconBase,
     IconTimer,
