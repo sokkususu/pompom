@@ -27,7 +27,7 @@
 <script>
 import RoundButton from "../RoundButton";
 
-import IconBase from "../IconBase";
+import IconBase from "../icons/IconBase";
 import IconNext from "../icons/timer_icons/IconNext";
 import IconStart from "../icons/timer_icons/IconStart";
 import IconStop from "../icons/timer_icons/IconStop";

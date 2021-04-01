@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import IconBase from "./IconBase";
+import IconBase from "./icons/IconBase";
 import IconTimer from "./icons/IconTimer";
 import IconStats from "./icons/IconStats";
 import IconSettings from "./icons/IconSettings";

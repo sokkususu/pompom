@@ -5,13 +5,8 @@
 </template>
 
 <script>
-import Timer from "./timer/Timer";
-
 export default {
   name: "Content",
-  components: {
-    Timer,
-  },
 };
 </script>
 

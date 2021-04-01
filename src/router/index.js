@@ -1,8 +1,8 @@
 import VueRouter from "vue-router";
 
-import Timer from "../components/timer/Timer";
-import Stats from "../components/stats/Stats";
-import Settings from "../components/settings/Settings";
+import Timer from "../components/timer";
+import Stats from "../components/stats";
+import Settings from "../components/settings";
 
 export default new VueRouter({
   mode: "history",
