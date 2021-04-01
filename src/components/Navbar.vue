@@ -2,7 +2,7 @@
   <nav class="navbar">
     <router-link
       v-for="item in items"
-      :key="item.id"
+      :key="item"
       :to="`/${item}`"
       :class="`navbar-${item} navbar-item`"
     >

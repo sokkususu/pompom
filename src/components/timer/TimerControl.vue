@@ -33,7 +33,7 @@ import IconStart from "../icons/timer_icons/IconStart";
 import IconStop from "../icons/timer_icons/IconStop";
 import IconPause from "../icons/timer_icons/IconPause";
 
-import { mapGetters, mapMutations, mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
@@ -48,16 +48,7 @@ export default {
     ...mapGetters(["isPlay"]),
   },
   methods: {
-    // ...mapMutations([""]),
-    ...mapActions(["skipTimer", "resetTimer"]),
-
-    play() {
-      if (!this.isPlay) {
-        this.$store.dispatch("start");
-      } else {
-        this.$store.commit("pause");
-      }
-    },
+    ...mapActions(["skipTimer", "resetTimer", "play"]),
   },
 };
 </script>

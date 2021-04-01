@@ -71,6 +71,13 @@ export default {
       }
       commit("changeStatus", status);
     },
+    play({ state, commit, dispatch }) {
+      if (!state.isPlay) {
+        dispatch("start");
+      } else {
+        commit("pause");
+      }
+    },
   },
   getters: {
     progress: (state) => state.time / state.duration,
