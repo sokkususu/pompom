@@ -95,5 +95,35 @@ export default {
         0
       );
     },
+
+    daysOfWeekSessions: (state) => (interval) => {
+      const days = [0, 0, 0, 0, 0, 0, 0];
+
+      const today = new Date();
+      const intervalAgo = new Date(today);
+      intervalAgo.setDate(today.getDate() - interval);
+
+      state.sessions.forEach((value) => {
+        if (+today > +value.date && +value.date > +intervalAgo)
+          days[value.date.getDay()]++;
+      });
+
+      return days;
+    },
+
+    daysOfWeekTime: (state) => (interval) => {
+      const days = [0, 0, 0, 0, 0, 0, 0];
+
+      const today = new Date();
+      const intervalAgo = new Date(today);
+      intervalAgo.setDate(today.getDate() - interval);
+
+      state.sessions.forEach((value) => {
+        if (+today > +value.date && +value.date > +intervalAgo)
+          days[value.date.getDay()] += value.time;
+      });
+
+      return days;
+    },
   },
 };

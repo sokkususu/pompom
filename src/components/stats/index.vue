@@ -8,6 +8,8 @@
     <div>weekTime: {{ weekTime }}</div>
     <div>monthSession: {{ monthSession }}</div>
     <div>monthTime: {{ monthTime }}</div>
+    <div>daysOfWeekSessions: {{ daysOfWeekSessions(30) }}</div>
+    <div>daysOfWeekTime: {{ daysOfWeekTime(30) }}</div>
   </div>
 </template>
 
@@ -26,6 +28,8 @@ export default {
       "weekTime",
       "monthSession",
       "monthTime",
+      "daysOfWeekSessions",
+      "daysOfWeekTime",
     ]),
   },
 };
