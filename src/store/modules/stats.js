@@ -1,6 +1,10 @@
 export default {
   state: {
-    labels: ["JavaScript", "Vue"],
+    labels: [
+      { name: "JavaScript", color: "red" },
+      { name: "Vue", color: "green" },
+      { name: "React", color: "blue" },
+    ],
     sessions: [
       {
         date: new Date(2021, 2, 30),
