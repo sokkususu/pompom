@@ -1,21 +1,19 @@
 <template>
-  <div class="task">
-    <input id="task-input" type="text" />
-  </div>
+  <select class="task">
+    <option v-for="label in labels" :key="label">{{ label }}</option>
+  </select>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "Task",
+  computed: {
+    ...mapGetters(["labels"]),
+  },
 };
 </script>
 
 <style>
-#task-input {
-  margin: auto;
-  width: 81px;
-  height: 30px;
-  border-radius: 8px;
-  border: 1px solid #434343;
-}
 </style>

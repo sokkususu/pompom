@@ -1,5 +1,6 @@
 export default {
   state: {
+    labels: ["JavaScript", "Vue"],
     sessions: [
       {
         date: new Date(2021, 2, 30),
@@ -14,116 +15,95 @@ export default {
     ],
   },
   mutations: {
+    addLabel(state, label) {
+      state.labels.push(label);
+    },
     addSession(state, session) {
       state.sessions.push(session);
     },
   },
   getters: {
-    totalSessions: (state) => state.sessions.length,
-    totalTime: (state) =>
-      state.sessions.reduce((sum, current) => sum + current.time, 0),
-
-    todaySessions: (state) => {
+    labels: (state) => state.labels,
+    overview: (state) => {
       const today = new Date();
       today.setHours(0, 0, 0, 0);
 
-      return state.sessions.reduce(
-        (sum, current) => (+current.date == +today ? ++sum : sum),
-        0
-      );
-    },
-
-    todayTime: (state) => {
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-
-      return state.sessions.reduce(
-        (sum, current) =>
-          +current.date == +today ? (sum += current.time) : sum,
-        0
-      );
-    },
-
-    weekSessions: (state) => {
-      const today = new Date();
       const weekAgo = new Date(today);
       weekAgo.setDate(today.getDate() - 7);
 
-      return state.sessions.reduce(
-        (sum, current) =>
-          +today > +current.date && +current.date > +weekAgo ? ++sum : sum,
-        0
-      );
-    },
-
-    weekTime: (state) => {
-      const today = new Date();
-      const weekAgo = new Date(today);
-      weekAgo.setDate(today.getDate() - 7);
-
-      return state.sessions.reduce(
-        (sum, current) =>
-          +today > +current.date && +current.date > +weekAgo
-            ? (sum += current.time)
-            : sum,
-        0
-      );
-    },
-
-    monthSession: (state) => {
-      const today = new Date();
       const monthAgo = new Date(today);
       monthAgo.setDate(today.getDate() - 30);
 
-      return state.sessions.reduce(
-        (sum, current) =>
-          +today > +current.date && +current.date > +monthAgo ? ++sum : sum,
-        0
-      );
+      const stats = {
+        totalSessions: state.sessions.length,
+        totalTime: 0,
+        todaySessions: 0,
+        todayTime: 0,
+        weekSessions: 0,
+        weekTime: 0,
+        monthSessions: 0,
+        monthTime: 0,
+      };
+
+      state.sessions.forEach((session) => {
+        stats.totalTime += session.time;
+
+        if (session.date == today) {
+          stats.todaySessions++;
+          stats.todayTime += session.time;
+        }
+
+        if (weekAgo < session.date && session.date <= today) {
+          stats.weekSessions++;
+          stats.weekTime += session.time;
+        }
+
+        if (monthAgo < session.date && session.date <= today) {
+          stats.monthSessions++;
+          stats.monthTime += session.time;
+        }
+      });
+
+      return stats;
     },
 
-    monthTime: (state) => {
-      const today = new Date();
-      const monthAgo = new Date(today);
-      monthAgo.setDate(today.getDate() - 30);
-
-      return state.sessions.reduce(
-        (sum, current) =>
-          +today > +current.date && +current.date > +monthAgo
-            ? (sum += current.time)
-            : sum,
-        0
-      );
-    },
-
-    daysOfWeekSessions: (state) => (interval) => {
-      const days = [0, 0, 0, 0, 0, 0, 0];
+    daysOfWeekStats: (state) => (interval) => {
+      const days = {
+        sessions: [0, 0, 0, 0, 0, 0, 0],
+        time: [0, 0, 0, 0, 0, 0, 0],
+      };
 
       const today = new Date();
       const intervalAgo = new Date(today);
       intervalAgo.setDate(today.getDate() - interval);
 
-      state.sessions.forEach((value) => {
-        if (+today > +value.date && +value.date > +intervalAgo)
-          days[value.date.getDay()]++;
+      state.sessions.forEach((session) => {
+        if (today > session.date && session.date > intervalAgo) {
+          days.sessions[session.date.getDay()]++;
+          days.time[session.date.getDay()] += session.time;
+        }
       });
 
       return days;
     },
 
-    daysOfWeekTime: (state) => (interval) => {
-      const days = [0, 0, 0, 0, 0, 0, 0];
+    labelsStats: (state) => (interval) => {
+      const labels = {};
+      for (let label of state.labels) {
+        labels[label] = 0;
+      }
 
       const today = new Date();
       const intervalAgo = new Date(today);
       intervalAgo.setDate(today.getDate() - interval);
 
-      state.sessions.forEach((value) => {
-        if (+today > +value.date && +value.date > +intervalAgo)
-          days[value.date.getDay()] += value.time;
+      state.sessions.forEach((session) => {
+        if (today > session.date && session.date > intervalAgo) {
+          labels[session.label]++;
+        }
       });
 
-      return days;
+      return labels;
     },
   },
 };

@@ -1,15 +1,15 @@
 <template>
   <div id="stats">
-    <div>totalSessions: {{ totalSessions }}</div>
-    <div>totalTime: {{ totalTime }}</div>
-    <div>todaySessions: {{ todaySessions }}</div>
-    <div>todayTime: {{ todayTime }}</div>
-    <div>weekSessions: {{ weekSessions }}</div>
-    <div>weekTime: {{ weekTime }}</div>
-    <div>monthSession: {{ monthSession }}</div>
-    <div>monthTime: {{ monthTime }}</div>
-    <div>daysOfWeekSessions: {{ daysOfWeekSessions(30) }}</div>
-    <div>daysOfWeekTime: {{ daysOfWeekTime(30) }}</div>
+    <div>totalSessions: {{ overview.totalSessions }}</div>
+    <div>totalTime: {{ overview.totalTime }}</div>
+    <div>todaySessions: {{ overview.todaySessions }}</div>
+    <div>todayTime: {{ overview.todayTime }}</div>
+    <div>weekSessions: {{ overview.weekSessions }}</div>
+    <div>weekTime: {{ overview.weekTime }}</div>
+    <div>monthSessions: {{ overview.monthSessions }}</div>
+    <div>monthTime: {{ overview.monthTime }}</div>
+    <div>daysOfWeek: {{ daysOfWeekStats(30) }}</div>
+    <div>labels: {{ labelsStats(30) }}</div>
   </div>
 </template>
 
@@ -19,18 +19,7 @@ export default {
   name: "Stats",
   methods: {},
   computed: {
-    ...mapGetters([
-      "totalSessions",
-      "totalTime",
-      "todaySessions",
-      "todayTime",
-      "weekSessions",
-      "weekTime",
-      "monthSession",
-      "monthTime",
-      "daysOfWeekSessions",
-      "daysOfWeekTime",
-    ]),
+    ...mapGetters(["daysOfWeekStats", "overview", "labelsStats"]),
   },
 };
 </script>
