@@ -50,7 +50,7 @@ body {
 }
 
 #app {
-  font-family: "Poppins", sans-serif;
+  /* font-family: "Poppins", sans-serif; */
   display: flex;
   flex-direction: column;
   justify-content: center;
